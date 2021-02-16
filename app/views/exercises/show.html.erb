@@ -10,5 +10,10 @@
   <%= @exercise.description %>
 </p>
 
+<p>
+  <strong>Tests:</strong>
+  <%= text_area_tag "tests", @exercise.tests %>
+</p>
+
 <%= link_to 'Edit', edit_exercise_path(@exercise) %> |
 <%= link_to 'Back', exercises_path %>

@@ -13,12 +13,14 @@ class ExercisesController < ApplicationController
   end
 
   def edit
+    @tests = @exercise.tests
   end
 
   def create
     @exercise = Exercise.new(exercise_params)
 
     if @exercise.save
+      @exercise.test_file.attach(io: StringIO.new(params[:exercise][:tests]), filename: "#{@exercise.name}_test.rb")
       redirect_to @exercise, notice: 'Exercise was successfully created.'
     else
       render :new
@@ -27,6 +29,7 @@ class ExercisesController < ApplicationController
 
   def update
     if @exercise.update(exercise_params)
+      @exercise.test_file.attach(io: StringIO.new(params[:exercise][:tests]), filename: "#{@exercise.name}_test.rb")
       redirect_to @exercise, notice: 'Exercise was successfully updated.'
     else
       render :edit
@@ -44,6 +47,6 @@ class ExercisesController < ApplicationController
     end
 
     def exercise_params
-      params.require(:exercise).permit(:name, :description)
+      params.require(:exercise).permit(:name, :description, :test_file)
     end
 end
