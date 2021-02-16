@@ -4,4 +4,12 @@ class Exercise < ApplicationRecord
   def tests
     test_file.blob.download
   end
+
+  def test_file_on_disk
+    ActiveStorage::Blob.service.send(:path_for, test_file.key)
+  end
+
+  def test_file_name
+    "#{name.parameterize(separator: '_')}_test.rb"
+  end
 end

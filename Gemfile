@@ -10,6 +10,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'docker-api', '~> 2.0'
 
 group :development, :test do
   gem 'pry-rails'
