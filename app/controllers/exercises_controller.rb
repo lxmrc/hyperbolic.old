@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :setup]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :setup, :attempt]
 
   def index
     @exercises = Exercise.all
@@ -45,6 +45,9 @@ class ExercisesController < ApplicationController
     container = Docker::Container.create('Image' => 'ghcr.io/lxmrc/minitest:latest', 'Tty' => true)
     container.store_file("/exercise/" + @exercise.test_file_name, @exercise.tests)
     container.start
+  end
+
+  def attempt
   end
 
   private
