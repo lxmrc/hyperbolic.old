@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :setup, :attempt]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :start_container, :update_container]
 
   def index
     @exercises = Exercise.all
@@ -45,15 +45,6 @@ class ExercisesController < ApplicationController
   def destroy
     @exercise.destroy
     redirect_to exercises_url, notice: 'Exercise was successfully destroyed.'
-  end
-
-  def setup
-    container = Docker::Container.create('Image' => 'ghcr.io/lxmrc/minitest:latest', 'Tty' => true)
-    container.store_file("/exercise/" + @exercise.test_file_name, @exercise.tests)
-    container.start
-  end
-
-  def attempt
   end
 
   private

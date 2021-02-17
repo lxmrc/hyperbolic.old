@@ -13,4 +13,8 @@ class Exercise < ApplicationRecord
   def test_file_name
     "#{name.parameterize(separator: '_')}_test.rb"
   end
+
+  def exercise_file_name
+    "#{name.parameterize(separator: '_')}.rb"
+  end
 end
