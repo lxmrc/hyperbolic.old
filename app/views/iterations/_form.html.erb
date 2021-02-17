@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field editor-container">
     <%= form.label :code %>
     <%= form.text_area :code, class: "editor" %>
   </div>
 
-  <div>
+  <div class="editor-container">
     <strong>Tests:</strong>
-    <%= text_area_tag "exercise_tests", exercise.tests, class: "editor" %>
+    <%= text_area_tag "exercise_tests", exercise.tests, class: "read-only-editor" %>
   </div>
 
   <div class="actions">

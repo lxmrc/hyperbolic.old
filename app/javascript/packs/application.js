@@ -21,4 +21,13 @@ window.onload = function exampleFunction() {
         keyMap: "vim"
       });
   })
+
+  Array.from(document.getElementsByClassName("read-only-editor")).forEach(function (editor) {
+    CodeMirror.fromTextArea(editor, {
+        lineNumbers: true,
+        mode: "ruby",
+        theme: "monokai",
+        readOnly: true
+      });
+  })
 } 
