@@ -6,28 +6,41 @@
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+require("jquery")
 
 Rails.start()
 ActiveStorage.start()
 
 import CodeMirror from "../src/codemirror"
 
-window.onload = function exampleFunction() { 
-  Array.from(document.getElementsByClassName("editor")).forEach(function (editor) {
-    CodeMirror.fromTextArea(editor, {
-        lineNumbers: true,
-        mode: "ruby",
-        theme: "monokai",
-        keyMap: "vim"
-      });
-  })
+window.onload = function () { 
+  let editor = document.getElementById("editor");
+  let tests = document.getElementById("tests");
+  let terminal = document.getElementById("terminal");
 
-  Array.from(document.getElementsByClassName("read-only-editor")).forEach(function (editor) {
-    CodeMirror.fromTextArea(editor, {
-        lineNumbers: true,
-        mode: "ruby",
-        theme: "monokai",
-        readOnly: true
-      });
-  })
+  if (editor !== null) {
+    window.editor = CodeMirror.fromTextArea(editor, {
+      lineNumbers: true,
+      mode: "ruby",
+      theme: "monokai",
+      keyMap: "vim"
+    });
+  }
+
+  if (tests !== null) {
+    window.tests = CodeMirror.fromTextArea(tests, {
+      lineNumbers: true,
+      mode: "ruby",
+      theme: "monokai",
+      readOnly: true
+    });
+  }
+
+  if (terminal !== null) {
+  window.terminal = CodeMirror.fromTextArea(terminal, {
+    mode: "shell",
+    theme: "monokai",
+    readOnly: true
+  });
+  }
 } 

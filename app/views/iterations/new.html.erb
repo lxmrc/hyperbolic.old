@@ -17,18 +17,39 @@
 
   <div class="field editor-container">
     <%= form.label :code %>
-    <%= form.text_area :code, class: "editor" %>
+    <%= form.text_area :code, id: "editor" %>
   </div>
 
   <div class="editor-container">
     <strong>Tests:</strong>
-    <%= text_area_tag "exercise_tests", @exercise.tests, class: "read-only-editor" %>
+    <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
+  </div>
+
+  <div>
+    <strong>Output:</strong>
+    <%= text_area_tag "terminal", nil, id: "terminal" %>
   </div>
 
   <div class="actions">
     <%= form.submit "Save", data: { disable_with: false } %>
-    <%= form.submit "Update", data: { disable_with: false }%>
   </div>
 <% end %>
 
+<%= button_to "Start", start_container_path(@exercise, @token) %>
+
+<script type="text/javascript">
+  function runTests() {
+    let token = document.getElementById("iteration_token").value
+    let code = document.querySelector(".CodeMirror").CodeMirror.doc.getValue();
+    $.ajax({url: "/exercises/" + <%= @exercise.id %> + "/iterations/" + token + "/run_tests", 
+            type: "POST",
+            data: { "code": code }
+    })
+  }
+</script>
+<input type="button" value="Run tests" onClick="runTests()"/>
+
+<%= button_to "Stop", stop_container_path(@exercise, @token) %>
+
 <%= link_to 'Back', exercise_iterations_path %>
+

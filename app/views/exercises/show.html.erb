@@ -12,8 +12,9 @@
 
 <p>
   <strong>Tests:</strong>
-  <%= text_area_tag "exercise_tests", @exercise.tests, class: "editor" %>
+  <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
 </p>
 
+<%= link_to 'Attempt', new_exercise_iteration_path(@exercise) %> |
 <%= link_to 'Edit', edit_exercise_path(@exercise) %> |
 <%= link_to 'Back', exercises_path %>

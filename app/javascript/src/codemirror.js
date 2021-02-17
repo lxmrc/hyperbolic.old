@@ -1,6 +1,7 @@
 import * as CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/ruby/ruby.js'
+import 'codemirror/mode/shell/shell.js'
 import 'codemirror/theme/monokai.css'
 import 'codemirror/keymap/vim.js'
 
