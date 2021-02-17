@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :exercises do
-    get :setup, on: :member
-    get :attempt, on: :member
+    resources :iterations
   end
 end

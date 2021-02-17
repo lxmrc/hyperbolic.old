@@ -16,7 +16,8 @@
       <tr>
         <td><%= exercise.name %></td>
         <td><%= exercise.description %></td>
-        <td><%= link_to 'Attempt', attempt_exercise_path(exercise) %></td>
+        <td><%= link_to 'Attempt', new_exercise_iteration_path(exercise) %></td>
+        <td><%= link_to 'Iterations', exercise_iterations_path(exercise) %></td>
         <td><%= link_to 'Show', exercise %></td>
         <td><%= link_to 'Edit', edit_exercise_path(exercise) %></td>
         <td><%= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %></td>

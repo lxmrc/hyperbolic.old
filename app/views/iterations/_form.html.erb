@@ -1,0 +1,27 @@
+<%= form_with(model: [exercise, iteration]) do |form| %>
+  <% if iteration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(iteration.errors.count, "error") %> prohibited this iteration from being saved:</h2>
+
+      <ul>
+        <% iteration.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_area :code, class: "editor" %>
+  </div>
+
+  <div>
+    <strong>Tests:</strong>
+    <%= text_area_tag "exercise_tests", exercise.tests, class: "editor" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

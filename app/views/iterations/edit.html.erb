@@ -1,0 +1,6 @@
+<h1>Editing Iteration</h1>
+
+<%= render 'form', iteration: @iteration, exercise: @exercise %>
+
+<%= link_to 'Show', [@exercise, @iteration] %> |
+<%= link_to 'Back', exercise_iterations_path(@exercise) %>

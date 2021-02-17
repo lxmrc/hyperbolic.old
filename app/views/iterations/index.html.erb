@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @exercise.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attempt number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @iterations.each do |iteration| %>
+      <tr>
+        <td><%= iteration.number %></td>
+        <td><%= link_to 'Show', exercise_iteration_path(iteration.exercise, iteration) %></td>
+        <td><%= link_to 'Edit', edit_exercise_iteration_path(iteration.exercise, iteration) %></td>
+        <td><%= link_to 'Destroy', exercise_iteration_path(iteration.exercise, iteration), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New iteration', new_exercise_iteration_path(@exercise) %>
+|
+<%= link_to 'Back to exercises', exercises_path %>

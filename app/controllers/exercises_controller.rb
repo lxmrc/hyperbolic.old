@@ -10,6 +10,12 @@ class ExercisesController < ApplicationController
 
   def new
     @exercise = Exercise.new
+    @tests = <<~TESTS
+      require 'minitest/autorun'
+      require 'minitest/reporters'
+      Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+
+    TESTS
   end
 
   def edit

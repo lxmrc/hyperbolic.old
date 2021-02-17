@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_065440) do
+ActiveRecord::Schema.define(version: 2021_02_17_014314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,8 +49,19 @@ ActiveRecord::Schema.define(version: 2021_02_16_065440) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "tests"
+    t.integer "iterations_count", default: 0
+  end
+
+  create_table "iterations", force: :cascade do |t|
+    t.bigint "exercise_id", null: false
+    t.datetime "completed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "number", default: 1
+    t.index ["exercise_id"], name: "index_iterations_on_exercise_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "iterations", "exercises"
 end
