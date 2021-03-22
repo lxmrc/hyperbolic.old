@@ -25,31 +25,34 @@
     <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
   </div>
 
+  <div class="actions">
+    <%= form.submit "Save", data: { disable_with: false }, class: "btn btn-success" %>
+  </div>
+
   <div>
     <strong>Output:</strong>
     <%= text_area_tag "terminal", nil, id: "terminal" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit "Save", data: { disable_with: false } %>
-  </div>
 <% end %>
 
-<%= button_to "Start", start_container_path(@exercise, @token) %>
+<div class="btn-group" role="group">
+  <%= button_to "Start", start_container_path(@exercise, @token), class: "btn btn-primary" %>
 
-<script type="text/javascript">
-  function runTests() {
-    let token = document.getElementById("iteration_token").value
-    let code = document.querySelector(".CodeMirror").CodeMirror.doc.getValue();
-    $.ajax({url: "/exercises/" + <%= @exercise.id %> + "/iterations/" + token + "/run_tests", 
-            type: "POST",
-            data: { "code": code }
-    })
-  }
-</script>
-<input type="button" value="Run tests" onClick="runTests()"/>
+  <script type="text/javascript">
+    function runTests() {
+      let token = document.getElementById("iteration_token").value
+      let code = document.querySelector(".CodeMirror").CodeMirror.doc.getValue();
+      $.ajax({url: "/exercises/" + <%= @exercise.id %> + "/iterations/" + token + "/run_tests", 
+              type: "POST",
+              data: { "code": code }
+      })
+    }
+  </script>
+  <input type="button" value="Run" onClick="runTests()" class="btn btn-warning"/>
 
-<%= button_to "Stop", stop_container_path(@exercise, @token) %>
+  <%= button_to "Stop", stop_container_path(@exercise, @token), class: "btn btn-danger" %>
+
+</div>
 
 <%= link_to 'Back', exercise_iterations_path %>
-

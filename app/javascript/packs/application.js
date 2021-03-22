@@ -46,3 +46,5 @@ window.onload = function () {
   });
   }
 } 
+
+import '../css/main.scss'
