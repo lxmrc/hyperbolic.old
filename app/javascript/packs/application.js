@@ -18,11 +18,13 @@ window.onload = function () {
   let tests = document.getElementById("tests");
   let terminal = document.getElementById("terminal");
 
+  let theme = "default";
+
   if (editor !== null) {
     window.editor = CodeMirror.fromTextArea(editor, {
       lineNumbers: true,
       mode: "ruby",
-      theme: "monokai",
+      theme: theme,
       keyMap: "vim"
     });
   }
@@ -31,7 +33,7 @@ window.onload = function () {
     window.tests = CodeMirror.fromTextArea(tests, {
       lineNumbers: true,
       mode: "ruby",
-      theme: "monokai",
+      theme: theme,
       readOnly: true
     });
   }
@@ -39,7 +41,7 @@ window.onload = function () {
   if (terminal !== null) {
   window.terminal = CodeMirror.fromTextArea(terminal, {
     mode: "shell",
-    theme: "monokai",
+    theme: theme,
     readOnly: true
   });
   }
