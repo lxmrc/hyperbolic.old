@@ -17,12 +17,12 @@
 
 <p class="editor-container">
   <strong>Code:</strong>
-  <%= text_area_tag "iteration_code", @iteration.code, class: "editor" %>
+  <%= text_area_tag "iteration_code", @iteration.code, id: "editor" %>
 </p>
 
 <p class="editor-container">
   <strong>Tests:</strong>
-  <%= text_area_tag "exercise_tests", @exercise.tests, class: "read-only-editor" %>
+  <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
 </p>
 
 <%= link_to 'Edit', edit_exercise_iteration_path(@iteration) %> |
