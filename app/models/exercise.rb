@@ -1,5 +1,5 @@
 class Exercise < ApplicationRecord
-  has_many :iterations
+  has_many :iterations, dependent: :destroy
   has_one_attached :test_file
 
   def tests
