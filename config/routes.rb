@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'exercises#index'
+
   resources :exercises do
     post :start_container, on: :member
     post :update_container, on: :member
