@@ -3,12 +3,6 @@ class IterationsController < ApplicationController
   before_action :set_iteration, only: [:show, :edit, :update, :destroy]
   before_action :find_container, only: [:run_tests, :stop_container]
 
-  def run_tests
-    container_id = $redis.get(params[:token])
-    container = Docker::Container.get(container_id)
-    @output = container.exec(['ruby', @exercise.test_file_name])
-  end
-
   def index
     @iterations = @exercise.iterations.all
   end
@@ -60,14 +54,13 @@ class IterationsController < ApplicationController
     @container.store_file("/exercise/#{@exercise.exercise_file_name}", params[:code])
     @output = @container.exec(['ruby', @exercise.test_file_name])[0][0]
     respond_to do |format|
-      #msg = { output: output }
-      #format.json  { render :json => msg } 
       format.js
     end
   end
 
   def stop_container
     @container.stop
+    @container.remove(force: true)
   end
 
   private
