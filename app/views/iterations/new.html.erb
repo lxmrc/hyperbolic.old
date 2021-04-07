@@ -48,18 +48,14 @@
 
   <%= form.hidden_field :token, value: @token %>
 
-  <div class="field editor-container">
+  <div class="field">
     <%= form.label :code %>
     <%= form.text_area :code, id: "editor" %>
   </div>
 
-  <div class="editor-container">
+  <div>
     <strong>Tests:</strong>
     <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Save", data: { disable_with: false }, class: "btn btn-success" %>
   </div>
 
   <div>
@@ -67,6 +63,9 @@
     <%= text_area_tag "terminal", nil, id: "terminal" %>
   </div>
 
+  <div class="actions">
+    <%= form.submit "Save", data: { disable_with: false }, class: "btn btn-success" %>
+  </div>
 <% end %>
 
 <input type="button" value="Run" onClick="runTests()" class="btn btn-warning"/>
