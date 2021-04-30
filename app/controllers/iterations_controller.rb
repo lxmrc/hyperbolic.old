@@ -44,33 +44,25 @@ class IterationsController < ApplicationController
   end
 
   def start_container
-    container = Docker::Container.create('Image' => 'ghcr.io/lxmrc/minitest:latest', 'Tty' => true)
-    container.store_file("/exercise/" + @exercise.test_file_name, @exercise.tests)
-    container.start
-    $redis.set(@token, container.id)
+    Containers::Start.new(exercise: @exercise, token: params[:token]).call
+    head :ok
   end
 
   def run_tests
-    @container.store_file("/exercise/#{@exercise.exercise_file_name}", params[:code])
-    @output = @container.exec(['ruby', @exercise.test_file_name])[0][0]
+    @output = Containers::Run.new(container: @container, exercise: @exercise, code: params[:code]).call
     respond_to do |format|
       format.js
     end
   end
 
   def stop_container
-    @container.stop
-    @container.remove(force: true)
+    Containers::Stop.new(container: @container).call
   end
 
   private
 
-    def update_container
-      container.store_file("/exercise/#{@exercise.exercise_file_name}", params[:iteration][:code])
-    end
-
     def find_container
-      @container = Docker::Container.get($redis.get(@token))
+      @container = Docker::Container.get($redis.get(params[:token]))
     end
 
     def set_exercise
