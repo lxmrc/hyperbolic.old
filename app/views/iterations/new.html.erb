@@ -1,36 +1,3 @@
-<script type="text/javascript">
-  function startContainer() {
-    let token = document.getElementById("iteration_token").value
-    $.ajax({ url: "/exercises/" + <%= @exercise.id %> + "/iterations/" + token + "/start_container",
-      type: "POST" })
-  }
-
-  function runTests() {
-    let token = document.getElementById("iteration_token").value
-    let code = document.querySelector(".CodeMirror").CodeMirror.doc.getValue();
-    $.ajax({url: "/exercises/" + <%= @exercise.id %> + "/iterations/" + token + "/run_tests", 
-            type: "POST",
-            data: { "code": code }
-    })
-  }
-
-  function stopContainer() {
-    let token = document.getElementById("iteration_token").value
-    $.ajax({ url: "/exercises/" + <%= @exercise.id %> + "/iterations/" + token + "/stop_container",
-      type: "POST" })
-  }
-
-  $(document).ready(startContainer);
-  window.addEventListener("unload", function () {
-    let data = new FormData()
-    let csrf_token = document.querySelector("meta[name=csrf-token]").getAttribute("content");
-    let iteration_token = document.getElementById("iteration_token").value
-    data.append("authenticity_token", csrf_token);
-    navigator.sendBeacon("/exercises/" + <%= @exercise.id %> + "/iterations/" + iteration_token + "/stop_container", data)
-    return null;
-  });
-</script>
-
 <h1>New Iteration</h1>
 
 <%= form_with(model: [@exercise, @iteration], remote: true) do |form| %>
@@ -46,6 +13,7 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :exercise_id, value: @exercise.id %>
   <%= form.hidden_field :token, value: @token %>
 
   <div class="field">
@@ -68,6 +36,8 @@
   </div>
 <% end %>
 
-<input type="button" value="Run" onClick="runTests()" class="btn btn-warning"/>
+<input id="run_tests" type="button" value="Run" class="btn btn-warning"/>
 
 <%= link_to 'Back', exercise_iterations_path %>
+
+<%= javascript_pack_tag "exercises" %>
