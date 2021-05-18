@@ -10,6 +10,9 @@ module Containers
       container.store_file("/exercise/" + exercise.test_file_name, exercise.tests)
       container.start
       $redis.set(token, container.id)
+      true
+    rescue Excon::Error::Socket
+      false
     end
 
     private

@@ -44,14 +44,20 @@ class IterationsController < ApplicationController
   end
 
   def start_container
-    Containers::Start.new(exercise: @exercise, token: params[:token]).call
-    head :ok
+    if Containers::Start.new(exercise: @exercise, token: params[:token]).call
+      head :ok
+    else
+      head :internal_server_error
+    end
   end
 
   def run_tests
-    @output = Containers::Run.new(container: @container, exercise: @exercise, code: params[:code]).call
-    respond_to do |format|
-      format.js
+    if @output = Containers::Run.new(container: @container, exercise: @exercise, code: params[:code]).call
+      respond_to do |format|
+        format.js
+      end
+    else
+      head :internal_server_error
     end
   end
 

@@ -3,8 +3,11 @@ import Rails from "@rails/ujs";
 function startContainer() {
   let token = document.getElementById("iteration_token").value
   let id = document.getElementById("iteration_exercise_id").value
-  Rails.ajax({ url: "/exercises/" + id + "/iterations/" + token + "/start_container",
+  $.ajax({ url: "/exercises/" + id + "/iterations/" + token + "/start_container",
     type: "POST" })
+    .fail(function() {
+      alert("Unable to start container.")
+    })
 }
 
 function runTests() {
@@ -16,6 +19,9 @@ function runTests() {
           type: "POST",
           data: { code: code }
   })
+    .fail(function() {
+      alert("No container running.")
+    })
 }
 
 function stopContainer() {

@@ -7,6 +7,9 @@ module Containers
     def call
       container.stop
       container.remove(force: true)
+      true
+    rescue Docker::Error::NotFoundError
+      false
     end
 
     private
