@@ -15,6 +15,7 @@ gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+gem 'rexml', '~> 3.2', '>= 3.2.4'
 
 group :development, :test do
   gem 'pry-rails'
