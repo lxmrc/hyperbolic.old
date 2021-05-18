@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   resources :exercises do
     post :start_container, on: :member
     post :update_container, on: :member
-    resources :iterations do
-    end
-
+    resources :iterations
   end
 
   post '/exercises/:exercise_id/iterations/:token/run_tests', to: 'iterations#run_tests', as: :run_tests
