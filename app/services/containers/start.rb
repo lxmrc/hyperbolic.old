@@ -6,7 +6,7 @@ module Containers
     end
 
     def call
-      container = Docker::Container.create('Image' => 'ghcr.io/lxmrc/minitest:latest', 'Tty' => true)
+      container = Docker::Container.create("Image" => "ghcr.io/lxmrc/minitest-hyperbolic:latest", "Tty" => true)
       container.store_file("/exercise/" + exercise.test_file_name, exercise.tests)
       container.start
       $redis.set(token, container.id)

@@ -8,7 +8,7 @@ module Containers
 
     def call
       container.store_file("/exercise/#{exercise.exercise_file_name}", code)
-      container.exec(['ruby', exercise.test_file_name])[0][0]
+      container.exec(["ruby", "/exercise/#{exercise.test_file_name}"])[0][0]
     rescue Docker::Error::ConflictError, Docker::Error::NotFoundError
       false
     end
