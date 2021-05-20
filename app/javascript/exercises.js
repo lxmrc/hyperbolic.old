@@ -20,7 +20,7 @@ function runTests() {
           data: { code: code }
   })
     .fail(function() {
-      alert("No container running.")
+      alert("An error occurred.")
     })
 }
 
