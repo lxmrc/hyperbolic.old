@@ -27,7 +27,7 @@ function runTests() {
 function stopContainer() {
   let token = document.getElementById("iteration_token").value
   let id = document.getElementById("iteration_exercise_id").value
-  Rails.ajax({ url: "/exercises/" + id + "/iterations/" + token + "/stop_container",
+  $.ajax({ url: "/exercises/" + id + "/iterations/" + token + "/stop_container",
     type: "POST" })
 }
 

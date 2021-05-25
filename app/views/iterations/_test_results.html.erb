@@ -1,0 +1,5 @@
+<% results = JSON.parse(@output, symbolize_names: true) %>
+<% tests = results[:passes].concat(results[:skips]).concat(results[:fails]) %>
+<% tests.each do |result| %>
+  <%= render "iterations/test_result", result: result %>
+<% end %>

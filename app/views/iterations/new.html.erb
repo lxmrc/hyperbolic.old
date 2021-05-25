@@ -21,14 +21,15 @@
     <%= form.text_area :code, id: "editor" %>
   </div>
 
-  <div>
-    <strong>Tests:</strong>
-    <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
-  </div>
+   <div>
+     <strong>Tests:</strong>
+     <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
+   </div>
 
   <div>
     <strong>Output:</strong>
     <%= text_area_tag "terminal", nil, id: "terminal" %>
+    <div id="test_results"></div>
   </div>
 
   <div class="actions">

@@ -13,7 +13,8 @@ class ExercisesController < ApplicationController
     @tests = <<~TESTS
       require 'minitest/autorun'
       require 'minitest/reporters'
-      Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+      require 'minitest/reporters/json_reporter'
+      Minitest::Reporters.use! Minitest::Reporters::JsonReporter.new
 
     TESTS
   end
