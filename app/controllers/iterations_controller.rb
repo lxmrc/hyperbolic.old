@@ -53,6 +53,11 @@ class IterationsController < ApplicationController
 
   def run_tests
     if @output = Containers::Run.new(container: @container, exercise: @exercise, code: params[:code]).call
+      if @output.blank?
+        head :internal_server_error
+        return
+      end
+
       respond_to do |format|
         format.js
       end
