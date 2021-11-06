@@ -14,7 +14,6 @@ function runTests() {
   let token = document.getElementById("iteration_token").value
   let id = document.getElementById("iteration_exercise_id").value
   let code = document.querySelector(".CodeMirror").CodeMirror.doc.getValue();
-  console.log(code)
   $.ajax({url: "/exercises/" + id + "/iterations/" + token + "/run_tests", 
           type: "POST",
           data: { code: code }
