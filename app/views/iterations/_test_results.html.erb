@@ -1,5 +1,5 @@
-<% results = JSON.parse(@output, symbolize_names: true) %>
-<% tests = results.fetch(:passes, []) + results.fetch(:skips, []) + results.fetch(:fails, []) %>
-<% tests.each do |result| %>
-  <%= render "iterations/test_result", result: result %>
+<% results = JSON.parse(CGI.unescape(@output), symbolize_names: true) %>
+<% results.each do |result| %>
+  <% color = result[:passed] ? "success" : "danger" %>
+  <li class="list-group-item list-group-item-<%= color %>"><%= result[:name] %></li>
 <% end %>
