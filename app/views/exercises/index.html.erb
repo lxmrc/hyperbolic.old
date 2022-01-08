@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="exercises-index">
+  <p id="notice"><%= notice %></p>
 
-<h1>
-  <span>Exercises</span>
-  <%= link_to new_exercise_path, class: "btn btn-success float-right mt-2" do %>
-    <i class="fas fa-plus"></i> Create Exercise
-  <% end %>
-</h1>
-<hr/>
+  <h1>
+    <span>Exercises</span>
+    <%= link_to new_exercise_path, class: "btn btn-success float-right mt-2" do %>
+      <i class="fas fa-plus"></i> Create Exercise
+    <% end %>
+  </h1>
+  <hr/>
 
-<% @exercises.each do |exercise| %>
-  <div class="card">
-    <div class="card-header">
-      <%= exercise.name %>
-    </div>
-    <div class="card-body">
-      <p class="card-text">
-        <%= exercise.description %>
-      </p>
-      <div class="btn-group">
-        <%= link_to new_exercise_iteration_path(exercise), class: "btn btn-success btn-sm px-3" do %>
-          <i class="fas fa-keyboard"></i> Open
-        <% end %>
+  <% @exercises.each do |exercise| %>
+    <div class="card">
+      <div class="card-header">
+        <%= exercise.name %>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          <%= exercise.description %>
+        </p>
+        <div class="btn-group">
+          <%= link_to new_exercise_iteration_path(exercise), class: "btn btn-success btn-sm px-3" do %>
+            <i class="fas fa-keyboard"></i> Open
+          <% end %>
 
-        <%= link_to exercise_iterations_path(exercise), class: "btn btn-primary btn-sm px-3" do %>
-          <i class="fas fa-history"></i> History
-        <% end %>
+          <%= link_to exercise_iterations_path(exercise), class: "btn btn-primary btn-sm px-3" do %>
+            <i class="fas fa-history"></i> History
+          <% end %>
 
-        <%= link_to edit_exercise_path(exercise), class: "btn btn-warning btn-sm px-3" do %>
-          <i class="fas fa-edit"></i> Edit
-        <% end %>
+          <%= link_to edit_exercise_path(exercise), class: "btn btn-warning btn-sm px-3" do %>
+            <i class="fas fa-edit"></i> Edit
+          <% end %>
 
-        <%= link_to exercise, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm px-3" do %>
-          <i class="fas fa-trash-alt"></i> Delete
-        <% end %>
+          <%= link_to exercise, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm px-3" do %>
+            <i class="fas fa-trash-alt"></i> Delete
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

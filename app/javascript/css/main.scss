@@ -1,6 +1,19 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import '@fortawesome/fontawesome-free';
 
-.container {
+.exercises-index {
   max-width: 720px;
+  margin: 0 auto;
+}
+
+.iterations-new {
+  max-width: 75vw;
+  margin: 0 auto;
+}
+
+.CodeMirror {
+  height: 50vh !important;
+  width: 100%;
+  font-size: 14px;
+  margin: 0;
 }

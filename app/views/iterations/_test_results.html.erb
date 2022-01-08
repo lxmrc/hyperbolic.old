@@ -1,5 +1,7 @@
 <% results = JSON.parse(CGI.unescape(@output), symbolize_names: true) %>
 <% results.each do |result| %>
   <% color = result[:passed] ? "success" : "danger" %>
-  <li class="list-group-item list-group-item-<%= color %>"><%= result[:name] %></li>
+  <li class="list-group-item list-group-item-<%= color %>" style="border-radius: 0.25em;">
+    <strong><%= result[:name] %></strong>
+  </li>
 <% end %>

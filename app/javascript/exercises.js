@@ -43,3 +43,9 @@ window.addEventListener("unload", function () {
   navigator.sendBeacon("/exercises/" + id + "/iterations/" + iteration_token + "/stop_container", data)
   return null;
 });
+
+window.addEventListener("keydown", function (event) {
+    if (event.ctrlKey && event.keyCode === 13) {
+      runTests();
+    }
+});
