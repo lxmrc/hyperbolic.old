@@ -13,4 +13,4 @@ ActiveStorage.start()
 
 require("../editor")
 import '../css/main.scss'
-
+import "@fortawesome/fontawesome-free/js/all";

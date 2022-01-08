@@ -1,1 +1,6 @@
 @import '~bootstrap/scss/bootstrap.scss';
+@import '@fortawesome/fontawesome-free';
+
+.container {
+  max-width: 720px;
+}
