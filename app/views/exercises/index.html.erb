@@ -10,13 +10,13 @@
   <hr/>
 
   <% @exercises.each do |exercise| %>
-    <div class="card">
+    <div class="card my-3">
       <div class="card-header">
         <%= exercise.name %>
       </div>
       <div class="card-body">
         <p class="card-text">
-          <%= exercise.description %>
+          <%= exercise.description.truncate_words(30, omission: '...')%>
         </p>
         <div class="btn-group">
           <%= link_to new_exercise_iteration_path(exercise), class: "btn btn-success btn-sm px-3" do %>
