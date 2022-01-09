@@ -44,6 +44,15 @@ window.addEventListener("unload", function () {
   return null;
 });
 
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  let data = new FormData()
+  let iteration_token = document.getElementById("iteration_token").value
+  let id = document.getElementById("iteration_exercise_id").value
+  navigator.sendBeacon("/exercises/" + id + "/iterations/" + iteration_token + "/stop_container", data)
+  return null;
+});
+
 window.addEventListener("keydown", function (event) {
     if (event.ctrlKey && event.keyCode === 13) {
       runTests();

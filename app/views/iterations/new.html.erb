@@ -1,61 +1,69 @@
 <div class="iterations-new">
   <div class="row">
-    <div class="col p-0">
-
-      <%= link_to 'Back', exercises_path %>
-
-      <h1><%= @exercise.name %></h1>
-      <p><%= @exercise.description %></p>
+    <div class="col-3 p-3">
+      <h1 class="exercise-title">
+        <%= image_tag(@exercise.icon + ".png", size: 35, style: 'display: inline; margin-bottom: 0.2em') %>
+        <%= @exercise.name %>
+      </h1>
+      <div class="exercise-description">
+        <%= simple_format(@exercise.description) %>
+      </div>
     </div>
-  </div>
+    <div class="col-9">
+    <%= form_with(model: [@exercise, @iteration], remote: true, id: "exercise-form") do |form| %>
+      <div class="row">
+        <div class="col p-0">
+          <% if @iteration.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@iteration.errors.count, "error") %> prohibited this iteration from being saved:</h2>
 
-  <%= form_with(model: [@exercise, @iteration], remote: true, id: "exercise-form") do |form| %>
+              <ul>
+                <% @iteration.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%= form.hidden_field :exercise_id, value: @exercise.id %>
+      <%= form.hidden_field :token, value: @token %>
+
+      <div class="row">
+        <div class="col-6 p-0">
+          <%= form.text_area :code, id: "editor" %>
+        </div>
+
+        <div class="col-6 p-0">
+          <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
+        </div>
+
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-9 px-0 pt-2">
+        <div class="alert alert-primary mb-2" role="alert">
+          Use <code>Ctrl + Enter</code> to run tests.
+        </div>
+      </div>
+      <div class="col-3 p-2">
+        <div class="btn-group" style="width: 100%;">
+          <input id="run_tests" type="button" value="Run" class="btn btn-lg btn-primary"/>
+          <button type="submit" form="exercise-form" class="btn btn-lg btn-success">Save</button>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col p-0">
-        <% if @iteration.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@iteration.errors.count, "error") %> prohibited this iteration from being saved:</h2>
-
-            <ul>
-              <% @iteration.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+        <%#= text_area_tag "terminal", nil, id: "terminal" %>
+        <div id="test_results"></div>
       </div>
     </div>
-
-    <%= form.hidden_field :exercise_id, value: @exercise.id %>
-    <%= form.hidden_field :token, value: @token %>
-
-    <div class="row">
-      <div class="col p-0">
-        <%= form.text_area :code, id: "editor" %>
-      </div>
-
-      <div class="col p-0">
-        <%= text_area_tag "exercise_tests", @exercise.tests, id: "tests" %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="row">
-    <div class="col px-0 pt-2">
-      <div class="alert alert-primary mb-2" role="alert">
-        Use <code>Ctrl + Enter</code> to run tests.
-      </div>
-      <input id="run_tests" type="button" value="Run Tests" class="btn btn-primary"/>
-      <button type="submit" form="exercise-form" class="btn btn-success">Save Iteration</button>
-    </div>
+    <%#= link_to 'Back', exercises_path %>
   </div>
-
-  <div class="row">
-    <div class="col px-0 pt-2">
-      <%#= text_area_tag "terminal", nil, id: "terminal" %>
-      <div id="test_results"></div>
-    </div>
-  </div>
-
-  <%= javascript_pack_tag "exercises" %>
 </div>
+
+
+<%= javascript_pack_tag "exercises" %>

@@ -7,13 +7,17 @@
 }
 
 .iterations-new {
-  max-width: 75vw;
   margin: 0 auto;
 }
 
 .CodeMirror {
-  height: 50vh !important;
+  height: 66vh !important;
   width: 100%;
   font-size: 14px;
   margin: 0;
+}
+
+.exercise-description {
+  padding: 1em;
+  border-radius: 0.25em;
 }
