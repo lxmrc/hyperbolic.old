@@ -58,6 +58,8 @@ class IterationsController < ApplicationController
         return
       end
 
+      @sorted_results = ResultPresenter.new(@output, @exercise.tests).sort
+
       respond_to do |format|
         format.js
       end

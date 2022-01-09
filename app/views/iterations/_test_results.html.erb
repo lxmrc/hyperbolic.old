@@ -1,7 +1,7 @@
-<% results = JSON.parse(CGI.unescape(@output), symbolize_names: true) %>
-<% results.each do |result| %>
+<%# results = JSON.parse(CGI.unescape(@output), symbolize_names: true) %>
+<% @sorted_results.each do |result| %>
   <% color = result[:passed] ? "success" : "danger" %>
-  <li class="list-group-item list-group-item-<%= color %>" style="width: 100%;">
+  <li class="test-result list-group-item list-group-item-<%= color %>" id="<%= result[:name] %>" style="width: 100%;">
     <strong><%= result[:name] %></strong>
   </li>
 <% end %>

@@ -48,4 +48,3 @@ RSpec.describe Containers::Start do
     expect(container.json["State"]["Running"]).to eq(true)
   end
 end
-
