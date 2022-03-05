@@ -1,7 +1,6 @@
 module Containers
   class KeepAlive
-    def initialize(exercise:, token:)
-      @exercise = exercise
+    def initialize(token:)
       @token = token
     end
 
@@ -14,6 +13,6 @@ module Containers
 
     private
 
-    attr_reader :exercise, :token
+    attr_reader :token
   end
 end

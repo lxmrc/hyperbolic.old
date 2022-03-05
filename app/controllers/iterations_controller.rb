@@ -59,6 +59,7 @@ class IterationsController < ApplicationController
       end
 
       @sorted_results = ResultPresenter.new(@output, @exercise.tests).sort
+      Containers::KeepAlive.new(token: params[:token]).call
 
       respond_to do |format|
         format.js
@@ -75,7 +76,7 @@ class IterationsController < ApplicationController
   private
 
     def find_container
-      @container = Docker::Container.get($redis.get(params[:token]))
+      @container = Docker::Container.get($redis.hget(params[:token], :container_id))
     end
 
     def set_exercise

@@ -12,7 +12,7 @@ RSpec.describe Containers::KeepAlive do
     $redis.flushdb
   end
 
-  subject(:service) { described_class.new(exercise: @exercise, token: "12345") }
+  subject(:service) { described_class.new(token: "12345") }
 
   it "updates last active time" do
     initial = $redis.hget("12345", :last_active).to_time
