@@ -4,10 +4,14 @@ function startContainer() {
   let token = document.getElementById("iteration_token").value
   let id = document.getElementById("iteration_exercise_id").value
   $.ajax({ url: "/exercises/" + id + "/iterations/" + token + "/start_container",
-    type: "POST" })
+    type: "POST",
+    async: false
+  })
     .fail(function() {
       alert("Unable to start container.")
     })
+  let button = document.getElementById("run_tests")
+  button.disabled = false
 }
 
 function runTests() {

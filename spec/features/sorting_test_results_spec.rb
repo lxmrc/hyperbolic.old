@@ -1,16 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature "Sorting test results", type: :feature do
-  before do
-    # test
-  end
-
   let(:exercise) { FactoryBot.create(:exercise, test_file: Rack::Test::UploadedFile.new("./spec/fixtures/test_result_order_test.rb")) }
 
   scenario "sorted test results", js: true do
     visit new_exercise_iteration_path(exercise.id)
     fill_in_editor_field "1"
-    sleep(2)
     click_button "Run"
     expect(all(".test-result").map { |li| li["id"] }).to eq(["test_one", "test_two", "test_three"])
   end
