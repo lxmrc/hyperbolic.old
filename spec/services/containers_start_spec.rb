@@ -27,6 +27,11 @@ RSpec.describe Containers::Start do
     expect($redis.hget("12345", :container_id)).to_not be_nil
   end
 
+  it "stores the last active time in Redis" do
+    service.call
+    expect($redis.hget("12345", :last_active)).to_not be_nil
+  end
+
   it "stores the test file inside the container" do
     service.call
     container = Docker::Container.get($redis.hget("12345", :container_id))
