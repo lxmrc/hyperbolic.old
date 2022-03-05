@@ -24,12 +24,12 @@ RSpec.describe Containers::Start do
 
   it "stores the token-ID pair in Redis" do
     service.call
-    expect($redis.get("12345")).to_not be_nil
+    expect($redis.hget("12345", :container_id)).to_not be_nil
   end
 
   it "stores the test file inside the container" do
     service.call
-    container = Docker::Container.get($redis.get("12345"))
+    container = Docker::Container.get($redis.hget("12345", :container_id))
     test_file = <<~TEST
       require 'minitest/autorun'
       require 'minitest/reporters'
@@ -49,7 +49,7 @@ RSpec.describe Containers::Start do
 
   it "starts the container" do
     service.call
-    container = Docker::Container.get($redis.get("12345"))
+    container = Docker::Container.get($redis.hget("12345", :container_id))
     expect(container.json["State"]["Running"]).to eq(true)
   end
 end
