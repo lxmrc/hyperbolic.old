@@ -31,6 +31,11 @@ RSpec.describe Containers::Start do
     service.call
     container = Docker::Container.get($redis.get("12345"))
     test_file = <<~TEST
+      require 'minitest/autorun'
+      require 'minitest/reporters'
+      require 'minitest/reporters/json_reporter'
+      Minitest::Reporters.use! Minitest::Reporters::JsonReporter.new
+
       require_relative "hello_world"
 
       class HelloWorldTest < Minitest::Test
